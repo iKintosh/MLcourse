@@ -78,4 +78,5 @@ print('Count the average time of work (hours-per-week) for those who earn a litt
  for each country (native-country). What will these be for Japan?')
 print(data.groupby(['native-country', 'salary'])['hours-per-week'].mean()[' Japan'])
 
+# second solution
 print(data.pivot_table(['hours-per-week'], ['native-country', 'salary'], aggfunc='mean').loc[[' Japan']])
