@@ -1,9 +1,8 @@
 import pandas as pd
-import numpy as np
 
-names = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 
-        'marital-status', 'occupation', 'relationship', 'race', 'sex', 'capital-gain', 
-        'capital-loss', 'hours-per-week', 'native-country', 'salary']
+names = ['age', 'workclass', 'fnlwgt', 'education', 'education-num',
+         'marital-status', 'occupation', 'relationship', 'race', 'sex', 'capital-gain',
+         'capital-loss', 'hours-per-week', 'native-country', 'salary']
 data = pd.read_csv('adult.data', header=None, names=names)
 # print(data.head())
 
@@ -28,7 +27,7 @@ and those who earn less than 50K per year?')
 d = {' <=50K': False, ' >50K': True}
 data['is_more_than_50'] = data['salary'].map(d)
 for flag in data['is_more_than_50'].unique():
-    print( flag, data[data['is_more_than_50'] == flag]['age'].std())
+    print(flag, data[data['is_more_than_50'] == flag]['age'].std())
 
 # second idea
 print(data.pivot_table(['age'], ['salary'], aggfunc=['std', 'mean']))
@@ -37,8 +36,8 @@ print(data.pivot_table(['age'], ['salary'], aggfunc=['std', 'mean']))
 # education? (education – Bachelors, Prof-school, Assoc-acdm, Assoc-voc, Masters or Doctorate feature)
 print('Is it true that people who earn more than 50K have at least high school \
 education? (education – Bachelors, Prof-school, Assoc-acdm, Assoc-voc, Masters or Doctorate feature)')
-ed=[' Bachelors', ' Prof-school', ' Assoc-acdm', ' Assoc-voc', ' Masters',' Doctorate']
-for e in data[data['salary']==' >50K']['education'].unique():
+ed = [' Bachelors', ' Prof-school', ' Assoc-acdm', ' Assoc-voc', ' Masters', ' Doctorate']
+for e in data[data['salary'] == ' >50K']['education'].unique():
     if e not in ed:
         print(False)
         break
@@ -57,10 +56,10 @@ print(' Among whom is the proportion of those who earn a lot (>50K) greater: mar
 (marital-status feature)? Consider as married those who have a marital-status starting with Married \
 (Married-civ-spouse, Married-spouse-absent or Married-AF-spouse), the rest are considered bachelors.')
 
-d={' Married-civ-spouse': True, ' Married-spouse-absent': True, ' Married-AF-spouse': True}
+d = {' Married-civ-spouse': True, ' Married-spouse-absent': True, ' Married-AF-spouse': True}
 data['is_married'] = data['marital-status'].map(d)
 data.loc[pd.isna(data['is_married']), 'is_married'] = False
-print(data[(data['sex']=='Male') & (data['salary']==' >50K')]['is_married'].value_counts(normalize=True))
+print(data[(data['sex'] == 'Male') & (data['salary'] == ' >50K')]['is_married'].value_counts(normalize=True))
 
 # 9. What is the maximum number of hours a person works per week (hours-per-week feature)? 
 # How many people work such a number of hours, and what is the percentage of those who earn a lot (>50K) among them?

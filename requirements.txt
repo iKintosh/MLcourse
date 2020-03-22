@@ -1,0 +1,4 @@
+auto-changelog==0.4.0
+pandas==0.25.3
+numpy
+jupyter==1.0.0
